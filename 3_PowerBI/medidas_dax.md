@@ -1,124 +1,95 @@
-# 🧠 BI Supermarket Profitability Strategy
- ## Otimização de Rentabilidade, Ticket Médio e Fidelização
+# 🧮 Documentação de Medidas DAX – Projeto UrbanFlow
 
-Este repositório apresenta um projeto de Business Intelligence (BI) desenvolvido com Power BI, SQL e DAX, com foco em análise estratégica de rentabilidade em uma rede de supermercados.
-
-O objetivo é identificar fatores que influenciam o Ticket Médio, a eficiência operacional e o comportamento do consumidor, apoiando decisões gerenciais orientadas por dados.
-
+Esta documentação descreve as fórmulas DAX desenvolvidas para o dashboard da UrbanFlow, organizadas por categorias de análise.
 ---
 
-## 📌 Conteúdo do Projeto
+## 📅 1. Inteligência de Tempo (Time Intelligence)
 
-Cada pasta ou arquivo representa uma etapa do projeto, incluindo:
+Medidas utilizadas para calcular variações e comparações temporais (MoM).
 
-- 📊 **Dashboard Power BI** — com análises executivas e estratégicas  
-- 🧮 **Medidas DAX** — com análises executivas e estratégicas
-- 🗄️ **Consultas SQL** — para validação analítica 
-- 📁 **Dataset tratado** — Dataset original (em inglês) e dataset final limpo (em português)  
-- 📘 **Documentação executiva e técnica** 
+**Saldo Anterior (LY / PM)**
 
----
 
-## 🧩 Contexto e Pergunta de Negócio
+```DAX
+Calcula o saldo total do mês anterior para fins de comparação.
+Snippet de código
+Saldo_Anterior = 
+CALCULATE(
+    [Saldo_Total], 
+    PREVIOUSMONTH(Calendario[Date])
+)
 
-> **“Quais fatores (Filial, Gênero, Pagamento e Produtos) mais influenciam o desempenho do Ticket Médio e da Rentabilidade?”**
 
-A análise foi motivada pela diferença de desempenho entre filiais, com destaque positivo para a **Filial C**.
-
----
-
-## 📈 Principais Insights
-
-### 🏪 Filial C — Benchmarking Operacional
-- Maior Ticket Médio  
-- Melhor eficiência no mix de produtos
-- Maior rentabilidade geral
-
----
-
-### 👩 Fidelização e Gênero
-- O público feminino membro concentra maior faturamento  
-- Programa de fidelidade ainda não maximiza ticket médio
-
----
-
-### 💳 Métodos de Pagamento
-- Crédito gera maior valor financeiro
-- Cash lidera em volume, mas não em rentabilidade
-
----
-
-## 🎯 Resultados Esperados
-
-| Indicador | Meta |
-|------------|------|
-| Ticket Médio (TM) | +8% a +12% |
-| Gasto per capita masculino | +10% |
-| Adesão ao Programa de Membros | +15% |
-| Uso de crédito | +20% |
-
----
-
-## 🧠 Próximos Passos de BI
-
-- 📉 **Churn Prediction**   
-- 🛒 **Basket Analysis**
-- 🧩 **Benchmark contínuo entre filiais**
-
----
-
-## ⚙️ Estrutura do Repositório
-
-```pgsql
-
-BI-Supermarket-Profitability-Strategy
-│
-├── Data/
-│   └── ft_vendas_supermercado.csv
-│
-├── PowerBI/
-│   ├── dashboard.pbix
-│   ├── imagens/
-│   └── README_PowerBI.md
-│
-├── SQL/
-│   ├── query_faturamento_feminino_filial_c.sql
-│   ├── query_ticket_medio_por_filial.sql
-│   └── README_SQL.md
-│
-│
-├── docs/
-│   ├── overview.md 
-│   └── Relatorio_Executivo.pdf
-│
-└── README.md
 ```
 
+**Variação de Saldo (Nominal)**
+
+```DAX
+
+Variação_Saldo = [Saldo_Total] - [Saldo_Anterior]
+
+```
+**Variação de Saldo (%)**
+
+Calcula a variação percentual em relação ao mês anterior.
+
+```DAX
+
+%_Variação_Saldo = DIVIDE([Variação_Saldo], [Saldo_Anterior])
+
+```
+💰 2. Medidas de Valor (Saldos e Entradas/Saídas)
+Cálculos fundamentais de volume financeiro.
+```DAX
+Saldo_Total = SUM(mini_projeto_financeiro_Clean[valor])
+
+Total_de_Entradas = 
+CALCULATE(
+    [Saldo_Total], 
+    mini_projeto_financeiro_Clean[tipo_movimento] = "Receita"
+)
+
+Total_de_Saidas = 
+ABS(
+    CALCULATE(
+        [Saldo_Total], 
+        mini_projeto_financeiro_Clean[tipo_movimento] = "Despesa"
+    )
+)
+
+```
+
+📊 3. Medidas de Volume e Performance (Ticket Médio)
+
+Cálculos de quantidade e médias por transação.
+
+```DAX
+Qtd_Total_de_Transacoes = DISTINCTCOUNT(mini_projeto_financeiro_Clean[id_transacao])
+
+Ticket_Medio = DIVIDE([Saldo_Total], [Qtd_Total_de_Transacoes])
+
+Qtd_transacoes_Entradas = CALCULATE([Qtd_Total_de_Transacoes], mini_projeto_financeiro_Clean[tipo_movimento] = "Receita")
+
+Ticket_Medio_Entradas = DIVIDE([Total_de_Entradas], [Qtd_Transacoes_Entradas])
+
+Qtd_transacoes_Saidas = CALCULATE([Qtd_Total_de_Transacoes], mini_projeto_financeiro_Clean[tipo_movimento] = "Despesa")
+
+Ticket_Medio_Saidas = ABS(DIVIDE([Total_de_Saidas], [Qtd_Transacoes_Saidas]))
+```
+
+🛠️ 4. Tabelas de Apoio
+
+**Tabela Calendário**
+
+Criada para suportar as funções de Time Intelligence.
+```DAX
+
+Calendario = CALENDARAUTO()
+
+```
 ---
-
-## 🧰 Tecnologias Utilizadas
-
-- **Power BI** (modelagem, DAX e visualização)
-- **SQL** (ETL, consultas de negócio)
-- **Excel** (validação de dados)
-- **DAX & Métricas customizadas**
-- **Storytelling com dados**
-
----
-
-
-## ⚖️ Licença / Aviso Legal
-
-Todo o conteúdo deste repositório foi desenvolvido para fins **educacionais e de portfólio pessoal**.  
-Você é livre para usar, modificar e compartilhar os arquivos, desde que mantenha os devidos créditos ao autor original.
-
----
-
-## 🤝 Conecte-se comigo
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Tiago%20Magalhães%20Santos-blue?logo=linkedin)](https://www.linkedin.com/in/tiago-magalh%C3%A3es-santos-0b6ab0b6/)  
-[![Kaggle](https://img.shields.io/badge/Kaggle-tiagomgsanalytics-20BEFF?logo=kaggle)](https://www.kaggle.com/tiagomgsanalytics)
-
----
-
+Destaques da Modelagem
+-	Segurança: Utilização da função DIVIDE em todas as métricas de média e variação para evitar erros de divisão por zero.
+-	Formatação Executiva: Aplicação da função ABS em métricas de saída para garantir uma visualização limpa e comparativa em gráficos de barras e indicadores de performance.
+________________________________________
 
