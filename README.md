@@ -1,111 +1,59 @@
-# 🧠 BI Supermarket Profitability Strategy
- ## Otimização de Rentabilidade, Ticket Médio e Fidelização
+# 📊 Análise Financeira UrbanFlow – Ciclo 2023
 
-Este repositório apresenta um projeto de Business Intelligence (BI) desenvolvido com Power BI, SQL e DAX, com foco em análise estratégica de rentabilidade em uma rede de supermercados.
+> **Projeto de Business Intelligence focado em diagnóstico de fluxo de caixa e sazonalidade operacional.**
 
-O objetivo é identificar fatores que influenciam o Ticket Médio, a eficiência operacional e o comportamento do consumidor, apoiando decisões gerenciais orientadas por dados.
+## 🏢 Contexto do Negócio
+A **UrbanFlow** atua em um ecossistema de serviços urbanos (Alimentação, Lazer, Transporte, Educação e Aluguel). O modelo de negócio é caracterizado por alto volume transacional e forte dependência de ciclos sazonais.
 
----
-
-## 📌 Conteúdo do Projeto
-
-Cada pasta ou arquivo representa uma etapa do projeto, incluindo:
-
-- 📊 **Dashboard Power BI** — com análises executivas e estratégicas  
-- 🧮 **Medidas DAX** — com análises executivas e estratégicas
-- 🗄️ **Consultas SQL** — para validação analítica 
-- 📁 **Dataset tratado** — Dataset original (em inglês) e dataset final limpo (em português)  
-- 📘 **Documentação executiva e técnica** 
+Este projeto simula o desempenho financeiro de 2023, utilizando **SQL** para tratamento de dados e **Power BI** para geração de insights estratégicos sobre o "efeito tesoura" identificado no 3º trimestre.
 
 ---
 
-## 🧩 Contexto e Pergunta de Negócio
-
-> **“Quais fatores (Filial, Gênero, Pagamento e Produtos) mais influenciam o desempenho do Ticket Médio e da Rentabilidade?”**
-
-A análise foi motivada pela diferença de desempenho entre filiais, com destaque positivo para a **Filial C**.
-
----
-
-## 📈 Principais Insights
-
-### 🏪 Filial C — Benchmarking Operacional
-- Maior Ticket Médio  
-- Melhor eficiência no mix de produtos
-- Maior rentabilidade geral
+## 🎯 Objetivos Técnicos
+* **Saúde Financeira:** Analisar Entradas, Saídas e Saldo Total (MoM).
+* **Eficiência:** Mensurar o Ticket Médio por categoria e meio de pagamento.
+* **Diagnóstico de Risco:** Identificar as causas da queda de performance no T3.
+* **Estrutura Contábil:** Decompor a operação em Fixo vs. Variável.
 
 ---
 
-### 👩 Fidelização e Gênero
-- O público feminino membro concentra maior faturamento  
-- Programa de fidelidade ainda não maximiza ticket médio
+## 🛠️ Tecnologias Utilizadas
+* **Power BI:** Modelagem de dados, DAX avançado e Visualização.
+* **SQL:** Exploração, agrupamentos e validações de integridade.
+* **Excel:** Base de dados e Dicionário de Dados.
+* **Git/GitHub:** Documentação e versionamento.
 
 ---
-
-### 💳 Métodos de Pagamento
-- Crédito gera maior valor financeiro
-- Cash lidera em volume, mas não em rentabilidade
-
----
-
-## 🎯 Resultados Esperados
-
-| Indicador | Meta |
-|------------|------|
-| Ticket Médio (TM) | +8% a +12% |
-| Gasto per capita masculino | +10% |
-| Adesão ao Programa de Membros | +15% |
-| Uso de crédito | +20% |
-
----
-
-## 🧠 Próximos Passos de BI
-
-- 📉 **Churn Prediction**   
-- 🛒 **Basket Analysis**
-- 🧩 **Benchmark contínuo entre filiais**
-
----
-
-## ⚙️ Estrutura do Repositório
 
 ```pgsql
 
-BI-Supermarket-Profitability-Strategy
-│
-├── Data/
-│   └── ft_vendas_supermercado.csv
-│
-├── PowerBI/
-│   ├── dashboard.pbix
-│   ├── imagens/
-│   └── README_PowerBI.md
-│
-├── SQL/
-│   ├── query_faturamento_feminino_filial_c.sql
-│   ├── query_ticket_medio_por_filial.sql
-│   └── README_SQL.md
-│
-│
-├── docs/
-│   ├── overview.md 
-│   └── Relatorio_Executivo.pdf
-│
-└── README.md
+
+## 📂 Estrutura do Repositório
+```bash
+├── 1_Excel/              # Base de dados e Dicionário de Dados
+├── 2_SQL_Queries/        # Scripts de exploração e agregação
+├── 3_PowerBI/            # Arquivo .PBIX e screenshots do painel
+├── docs/                 # Relatório Executivo em PDF
+└── README.md             # Documentação principal
+
 ```
+## 📈 Estrutura do Dashboard (5 Páginas)
 
----
+* **KPIs e Visão Macro:** Visão consolidada de saldo e evolução temporal.
+* **Análise Geral:** Ticket Médio Geral e tabelas de variação mensal.
+* **Relatório de Receitas:** Performance por categoria e qualidade de meios de pagamento (Crédito/PIX).
+* **Relatório de Despesas:** Estrutura de gastos e complexidade operacional (transações).
+* **Fixo vs. Variável:** Diagnóstico contábil e exposição de risco no T3.
 
-## 🧰 Tecnologias Utilizadas
+  ---
 
-- **Power BI** (modelagem, DAX e visualização)
-- **SQL** (ETL, consultas de negócio)
-- **Excel** (validação de dados)
-- **DAX & Métricas customizadas**
-- **Storytelling com dados**
+## 🧠 Insights e Conclusões
 
----
+* **O Gargalo do T3:** O prejuízo no 3º trimestre não foi apenas queda de vendas, mas uma inversão de risco: as entradas fixas recuaram (sazonalidade escolar) enquanto os custos variáveis (Saúde/Transporte) atingiram o pico.
+* **Qualidade do Ticket:** O Crédito e o PIX apresentaram os maiores Tickets Médios, sendo pilares fundamentais para a manutenção da liquidez da empresa.
+* **Ações Sugeridas:** Consolidação estratégica de pagamentos a fornecedores no T3 e criação de combos promocionais para a categoria Lazer para elevar o ticket médio de baixo valor unitário.
 
+  ---
 
 ## ⚖️ Licença / Aviso Legal
 
@@ -117,8 +65,11 @@ Você é livre para usar, modificar e compartilhar os arquivos, desde que manten
 ## 🤝 Conecte-se comigo
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Tiago%20Magalhães%20Santos-blue?logo=linkedin)](https://www.linkedin.com/in/tiago-magalh%C3%A3es-santos-0b6ab0b6/)  
-[![Kaggle](https://img.shields.io/badge/Kaggle-tiagomgsanalytics-20BEFF?logo=kaggle)](https://www.kaggle.com/tiagomgsanalytics)
 
 ---
 
+## 📎 Observação
+Este projeto foi desenvolvido com foco em **storytelling analítico**, priorizando decisões de negócio e leitura executiva dos dados.
+
+  
 
