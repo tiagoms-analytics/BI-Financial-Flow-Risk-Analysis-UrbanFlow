@@ -1,124 +1,38 @@
-# 🧠 BI Supermarket Profitability Strategy
- ## Otimização de Rentabilidade, Ticket Médio e Fidelização
 
-Este repositório apresenta um projeto de Business Intelligence (BI) desenvolvido com Power BI, SQL e DAX, com foco em análise estratégica de rentabilidade em uma rede de supermercados.
+# 🗄️ Processamento e Análise de Dados com SQL
 
-O objetivo é identificar fatores que influenciam o Ticket Médio, a eficiência operacional e o comportamento do consumidor, apoiando decisões gerenciais orientadas por dados.
+Esta pasta contém os scripts SQL desenvolvidos para a extração, tratamento e análise exploratória dos dados financeiros da **UrbanFlow**. O trabalho foi dividido em blocos lógicos para garantir a integridade dos dados e facilitar a manutenção.
+---
+
+## 📑 Lista de Arquivos e Objetivos
+
+### 1. `01_setup_database.sql`
+* **Objetivo:** Criação da infraestrutura de dados.
+* **Ações:** Criação do banco de dados `financeiro`, definição da tabela `transacoes_financeiras` com tipos de dados otimizados e execução do tratamento da coluna de datas (conversão de `VARCHAR` brasileiro para `DATE` padrão MySQL).
+
+### 2. `02_exploracao_geral.sql`
+* **Objetivo:** Visão macro dos números anuais.
+* **Ações:** Consultas para totalização de entradas, saídas, saldo final do ano e volumetria de transações por tipo de movimentação. Serve como base de validação para o dashboard.
+
+### 3. `03_analise_mensal_e_saldo.sql`
+* **Objetivo:** Identificar tendências temporais e sazonalidade.
+* **Ações:** Agrupamentos mensais de entradas e saídas. Utiliza **Window Functions (`LAG`)** para calcular a variação de crescimento de saldo mês a mês e identificar os períodos de queda crítica no T3.
+
+### 4. `04_analise_por_categorias.sql`
+* **Objetivo:** Diagnóstico setorial dos gastos e receitas.
+* **Ações:** Identificação das categorias com maior gasto total, cálculo de médias por setor e frequência de transações segmentadas por tipo (Entrada/Saída), revelando o comportamento operacional de cada área de negócio.
+
+### 5. `05_analise_meios_pagamento.sql`
+* **Objetivo:** Eficiência financeira e auditoria de transações.
+* **Ações:** Análise de concentração de valores por forma de pagamento e identificação de anomalias (muitas transações para baixo volume financeiro). Utiliza funções de agregação e filtros `HAVING`.
 
 ---
 
-## 📌 Conteúdo do Projeto
+## 🛠️ Principais Técnicas Aplicadas
+* **Tratamento de Dados:** `STR_TO_DATE` e `ALTER TABLE`.
+* **Lógica Condicional:** Uso extensivo de `CASE WHEN` para criação de KPIs personalizados.
+* **Análise Avançada:** Funções de Janela (`OVER`, `ORDER BY`, `LAG`) para cálculos de variação MoM.
+* **Filtros de Agregação:** Uso de `GROUP BY` e `HAVING` para segmentação de categorias e meios de pagamento.
 
-Cada pasta ou arquivo representa uma etapa do projeto, incluindo:
-
-- 📊 **Dashboard Power BI** — com análises executivas e estratégicas  
-- 🧮 **Medidas DAX** — com análises executivas e estratégicas
-- 🗄️ **Consultas SQL** — para validação analítica 
-- 📁 **Dataset tratado** — Dataset original (em inglês) e dataset final limpo (em português)  
-- 📘 **Documentação executiva e técnica** 
-
----
-
-## 🧩 Contexto e Pergunta de Negócio
-
-> **“Quais fatores (Filial, Gênero, Pagamento e Produtos) mais influenciam o desempenho do Ticket Médio e da Rentabilidade?”**
-
-A análise foi motivada pela diferença de desempenho entre filiais, com destaque positivo para a **Filial C**.
-
----
-
-## 📈 Principais Insights
-
-### 🏪 Filial C — Benchmarking Operacional
-- Maior Ticket Médio  
-- Melhor eficiência no mix de produtos
-- Maior rentabilidade geral
-
----
-
-### 👩 Fidelização e Gênero
-- O público feminino membro concentra maior faturamento  
-- Programa de fidelidade ainda não maximiza ticket médio
-
----
-
-### 💳 Métodos de Pagamento
-- Crédito gera maior valor financeiro
-- Cash lidera em volume, mas não em rentabilidade
-
----
-
-## 🎯 Resultados Esperados
-
-| Indicador | Meta |
-|------------|------|
-| Ticket Médio (TM) | +8% a +12% |
-| Gasto per capita masculino | +10% |
-| Adesão ao Programa de Membros | +15% |
-| Uso de crédito | +20% |
-
----
-
-## 🧠 Próximos Passos de BI
-
-- 📉 **Churn Prediction**   
-- 🛒 **Basket Analysis**
-- 🧩 **Benchmark contínuo entre filiais**
-
----
-
-## ⚙️ Estrutura do Repositório
-
-```pgsql
-
-BI-Supermarket-Profitability-Strategy
-│
-├── Data/
-│   └── ft_vendas_supermercado.csv
-│
-├── PowerBI/
-│   ├── dashboard.pbix
-│   ├── imagens/
-│   └── README_PowerBI.md
-│
-├── SQL/
-│   ├── query_faturamento_feminino_filial_c.sql
-│   ├── query_ticket_medio_por_filial.sql
-│   └── README_SQL.md
-│
-│
-├── docs/
-│   ├── overview.md 
-│   └── Relatorio_Executivo.pdf
-│
-└── README.md
-```
-
----
-
-## 🧰 Tecnologias Utilizadas
-
-- **Power BI** (modelagem, DAX e visualização)
-- **SQL** (ETL, consultas de negócio)
-- **Excel** (validação de dados)
-- **DAX & Métricas customizadas**
-- **Storytelling com dados**
-
----
-
-
-## ⚖️ Licença / Aviso Legal
-
-Todo o conteúdo deste repositório foi desenvolvido para fins **educacionais e de portfólio pessoal**.  
-Você é livre para usar, modificar e compartilhar os arquivos, desde que mantenha os devidos créditos ao autor original.
-
----
-
-## 🤝 Conecte-se comigo
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Tiago%20Magalhães%20Santos-blue?logo=linkedin)](https://www.linkedin.com/in/tiago-magalh%C3%A3es-santos-0b6ab0b6/)  
-[![Kaggle](https://img.shields.io/badge/Kaggle-tiagomgsanalytics-20BEFF?logo=kaggle)](https://www.kaggle.com/tiagomgsanalytics)
-
----
-
-
+## 🚀 Como utilizar
+Os scripts foram numerados de **01 a 05** para indicar a ordem lógica de execução. Para replicar o ambiente, execute o script `01_setup_database.sql` primeiro para garantir que a tipagem dos dados esteja correta antes das consultas de análise.
