@@ -1,123 +1,120 @@
-# 🧠 BI Supermarket Profitability Strategy
- ## Otimização de Rentabilidade, Ticket Médio e Fidelização
+# 📊 Dashboard Power BI — UrbanFlow: Gestão, Fluxo e Risco Financeiro
 
-Este repositório apresenta um projeto de Business Intelligence (BI) desenvolvido com Power BI, SQL e DAX, com foco em análise estratégica de rentabilidade em uma rede de supermercados.
+Este painel apresenta análises completas sobre:
+* **Saúde Financeira:** Entradas, Saídas e Saldo Líquido.
+* **Eficiência Operacional:** Ticket Médio por categoria e canal.
+* **Sazonalidade:** Diagnóstico detalhado de performance mensal.
+* **Estrutura de Gastos:** Análise contábil (Fixo vs. Variável).
+* **Gestão de Risco:** Identificação de anomalias no 3º Trimestre (T3).
 
-O objetivo é identificar fatores que influenciam o Ticket Médio, a eficiência operacional e o comportamento do consumidor, apoiando decisões gerenciais orientadas por dados.
-
----
-
-## 📌 Conteúdo do Projeto
-
-Cada pasta ou arquivo representa uma etapa do projeto, incluindo:
-
-- 📊 **Dashboard Power BI** — com análises executivas e estratégicas  
-- 🧮 **Medidas DAX** — com análises executivas e estratégicas
-- 🗄️ **Consultas SQL** — para validação analítica 
-- 📁 **Dataset tratado** — Dataset original (em inglês) e dataset final limpo (em português)  
-- 📘 **Documentação executiva e técnica** 
+As imagens das páginas estão na pasta `/3_PowerBI/imagens/`.
 
 ---
 
-## 🧩 Contexto e Pergunta de Negócio
+## 🟦 Página 01 — KPIs e Visão Macro
+**Arquivo:** `01_visao_macro.png`  
+**Principais KPIs:**
+* Total de Entradas
+* Total de Saídas
+* Saldo Total (Acumulado)
+* Evolução temporal (Linha do tempo)
 
-> **“Quais fatores (Filial, Gênero, Pagamento e Produtos) mais influenciam o desempenho do Ticket Médio e da Rentabilidade?”**
+**Entendimento:**
 
-A análise foi motivada pela diferença de desempenho entre filiais, com destaque positivo para a **Filial C**.
+📌 O saldo total de **2 Mi** esconde uma volatilidade perigosa no segundo semestre.
 
----
-
-## 📈 Principais Insights
-
-### 🏪 Filial C — Benchmarking Operacional
-- Maior Ticket Médio  
-- Melhor eficiência no mix de produtos
-- Maior rentabilidade geral
-
----
-
-### 👩 Fidelização e Gênero
-- O público feminino membro concentra maior faturamento  
-- Programa de fidelidade ainda não maximiza ticket médio
+📌 Picos de entrada em Junho e Outubro garantiram a sobrevivência do fluxo anual.
 
 ---
 
-### 💳 Métodos de Pagamento
-- Crédito gera maior valor financeiro
-- Cash lidera em volume, mas não em rentabilidade
+## 🔧 Página 02 — Análise Geral
+**Arquivo:** `02_analise_geral.png`  
+**Perguntas respondidas:**
+* Qual o Ticket Médio Geral da operação?
+* Como o saldo variou em relação ao mês anterior (MoM)?
+* Qual a eficiência das formas de pagamento?
+
+**Perceções:**
+* **Ticket Médio (4,46 Mil):** Indica uma operação de médio valor unitário.
+* **Crédito:** Apresenta o maior ticket médio, sendo o motor de valor da empresa.
+* **Variação MoM:** Identificamos os sinais de alerta antes da queda drástica do T3.
 
 ---
 
-## 🎯 Resultados Esperados
+## 💰 Página 03 — Relatório de Receitas
+**Arquivo:** `03_receitas.png`  
+**Inclui:**
+* Ticket Médio de Entradas
+* Participação por meio de pagamento (Rosca)
+* Receita por Categoria vs. Ticket Médio
 
-| Indicador | Meta |
-|------------|------|
-| Ticket Médio (TM) | +8% a +12% |
-| Gasto per capita masculino | +10% |
-| Adesão ao Programa de Membros | +15% |
-| Uso de crédito | +20% |
+**Entendimento:**
 
----
+📌 **Lazer** gera volume, mas **Educação** gera estabilidade.
 
-## 🧠 Próximos Passos de BI
-
-- 📉 **Churn Prediction**   
-- 🛒 **Basket Analysis**
-- 🧩 **Benchmark contínuo entre filiais**
+📌 O **PIX (27,29%)** é o principal aliado da liquidez imediata.
 
 ---
 
-## ⚙️ Estrutura do Repositório
+## 💸 Página 04 — Relatório de Despesas
+**Arquivo:** `04_despesas.png`  
+**Inclui:**
+* Ticket Médio de Saídas
+* Top categorias de custo
+* Complexidade operacional (Volume de transações de saída)
+
+**Perceções:**
+* **Salários e Aluguel:** São as âncoras de custo fixo.
+* **Pico de Setembro:** Houve uma explosão na quantidade de transações, aumentando o custo variável operacional.
+
+---
+
+## ⚖️ Página 05 — Fixo vs. Variável (Diagnóstico T3)
+**Arquivo:** `05_fixo_variavel.png`  
+**Exibir:**
+* Comparativo Anual (Fixos vs. Variáveis)
+* Treemap de Categorias por Natureza
+* Análise de Risco Trimestral
+
+**Entendimento:**
+
+📌 **Conclusão Estratégica:**
+
+**O prejuízo do T3 foi causado pelo "Efeito Tesoura":** As receitas fixas (Educação) caíram enquanto despesas variáveis (Saúde/Transporte) subiram 35%.
+
+---
+
+## 🧩 Modelagem (Resumida)
+
+* **Esquema Star Schema:** Tabela Fato (`mini_projeto_financeiro_Clean`).
+* **Dimensões:** Calendário (DAX), Categorias, Meios de Pagamento.
+* **Medidas DAX:** Otimizadas para performance, utilizando inteligência de tempo (arquivo: `medidas_dax.md`).
+
+---
+
+## 📁 Estrutura da pasta Power BI
 
 ```pgsql
 
-BI-Supermarket-Profitability-Strategy
-│
-├── Data/
-│   └── ft_vendas_supermercado.csv
-│
-├── PowerBI/
-│   ├── dashboard.pbix
-│   ├── imagens/
-│   └── README_PowerBI.md
-│
-├── SQL/
-│   ├── query_faturamento_feminino_filial_c.sql
-│   ├── query_ticket_medio_por_filial.sql
-│   └── README_SQL.md
-│
-│
-├── docs/
-│   ├── overview.md 
-│   └── Relatorio_Executivo.pdf
-│
-└── README.md
+
+/3_PowerBI/
+│── dashboard_urbanflow.pbix
+│── medidas_dax.md
+│── README_PowerBI.md   # Este arquivo
+└── imagens/
+      01_visao_macro.png
+      02_analise_geral.png
+      03_receitas.png
+      04_despesas.png
+      05_fixo_variavel.png
+
 ```
-
----
-
-## 🧰 Tecnologias Utilizadas
-
-- **Power BI** (modelagem, DAX e visualização)
-- **SQL** (ETL, consultas de negócio)
-- **Excel** (validação de dados)
-- **DAX & Métricas customizadas**
-- **Storytelling com dados**
-
----
-
-
-## ⚖️ Licença / Aviso Legal
-
-Todo o conteúdo deste repositório foi desenvolvido para fins **educacionais e de portfólio pessoal**.  
-Você é livre para usar, modificar e compartilhar os arquivos, desde que mantenha os devidos créditos ao autor original.
 
 ---
 
 ## 🤝 Conecte-se comigo
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Tiago%20Magalhães%20Santos-blue?logo=linkedin)](https://www.linkedin.com/in/tiago-magalh%C3%A3es-santos-0b6ab0b6/)  
-[![Kaggle](https://img.shields.io/badge/Kaggle-tiagomgsanalytics-20BEFF?logo=kaggle)](https://www.kaggle.com/tiagomgsanalytics)
 
 ---
 
