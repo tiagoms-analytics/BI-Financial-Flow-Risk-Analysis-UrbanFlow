@@ -13,7 +13,7 @@ Medidas utilizadas para calcular variações e comparações temporais (MoM).
 ```DAX
 Calcula o saldo total do mês anterior para fins de comparação.
 Snippet de código
-Saldo_Anterior = 
+Saldo_Liquido_Anterior = 
 CALCULATE(
     [Saldo_Líquido], 
     PREVIOUSMONTH(Calendario[Date])
@@ -26,7 +26,7 @@ CALCULATE(
 
 ```DAX
 
-Variação_Saldo = [Saldo_Líquido] - [Saldo_Anterior]
+Variação_Saldo = [Saldo_Liquido] - [Saldo_Anterior]
 
 ```
 **Variação de Saldo (%)**
@@ -41,18 +41,18 @@ Calcula a variação percentual em relação ao mês anterior.
 💰 2. Medidas de Valor (Saldos e Entradas/Saídas)
 Cálculos fundamentais de volume financeiro.
 ```DAX
-Saldo_Líquido = SUM(mini_projeto_financeiro_Clean[valor])
+Saldo_Liquido = SUM(mini_projeto_financeiro_Clean[valor])
 
 Total_de_Entradas = 
 CALCULATE(
-    [Saldo_Líquido], 
+    [Saldo_Liquido], 
     mini_projeto_financeiro_Clean[tipo_movimento] = "Receita"
 )
 
 Total_de_Saidas = 
 ABS(
     CALCULATE(
-        [Saldo_Líquido], 
+        [Saldo_Liquido], 
         mini_projeto_financeiro_Clean[tipo_movimento] = "Despesa"
     )
 )
