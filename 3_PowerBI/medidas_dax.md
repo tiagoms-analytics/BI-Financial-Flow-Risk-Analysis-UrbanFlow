@@ -15,7 +15,7 @@ Calcula o saldo total do mês anterior para fins de comparação.
 Snippet de código
 Saldo_Anterior = 
 CALCULATE(
-    [Saldo_Total], 
+    [Saldo_Líquido], 
     PREVIOUSMONTH(Calendario[Date])
 )
 
@@ -26,7 +26,7 @@ CALCULATE(
 
 ```DAX
 
-Variação_Saldo = [Saldo_Total] - [Saldo_Anterior]
+Variação_Saldo = [Saldo_Líquido] - [Saldo_Anterior]
 
 ```
 **Variação de Saldo (%)**
@@ -41,18 +41,18 @@ Calcula a variação percentual em relação ao mês anterior.
 💰 2. Medidas de Valor (Saldos e Entradas/Saídas)
 Cálculos fundamentais de volume financeiro.
 ```DAX
-Saldo_Total = SUM(mini_projeto_financeiro_Clean[valor])
+Saldo_Líquido = SUM(mini_projeto_financeiro_Clean[valor])
 
 Total_de_Entradas = 
 CALCULATE(
-    [Saldo_Total], 
+    [Saldo_Líquido], 
     mini_projeto_financeiro_Clean[tipo_movimento] = "Receita"
 )
 
 Total_de_Saidas = 
 ABS(
     CALCULATE(
-        [Saldo_Total], 
+        [Saldo_Líquido], 
         mini_projeto_financeiro_Clean[tipo_movimento] = "Despesa"
     )
 )
@@ -66,7 +66,7 @@ Cálculos de quantidade e médias por transação.
 ```DAX
 Qtd_Total_de_Transacoes = DISTINCTCOUNT(mini_projeto_financeiro_Clean[id_transacao])
 
-Ticket_Medio = DIVIDE([Saldo_Total], [Qtd_Total_de_Transacoes])
+Ticket_Medio = DIVIDE([Saldo_Líquido], [Qtd_Total_de_Transacoes])
 
 Qtd_transacoes_Entradas = CALCULATE([Qtd_Total_de_Transacoes], mini_projeto_financeiro_Clean[tipo_movimento] = "Receita")
 
